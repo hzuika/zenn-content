@@ -227,3 +227,72 @@ b & b
 $$
 
 グラフに描く際は，固有ベクトル方向は固有値倍になることを意識する．
+
+---
+
+### 例3
+
+行列がランク落ちしている場合．
+
+$$
+\begin{aligned}
+\dot{\vec{x}} = 
+\begin{bmatrix}
+\dot{x} \\ \dot{y}
+\end{bmatrix}&= \mathbf{A}\vec{x}\\
+&= 
+\begin{bmatrix}
+0 & 0\\
+a & b
+\end{bmatrix}
+\begin{bmatrix}
+x \\ y
+\end{bmatrix}\\
+&= 
+\begin{bmatrix}
+0\\
+a{x} + b{y}
+\end{bmatrix}
+\end{aligned}
+$$
+
+$\dot{x} = 0$より，
+
+$$
+\begin{aligned}
+x = C_1\\
+\end{aligned}
+$$
+
+$C_1$は定数．
+
+$$
+\begin{aligned}
+\dot{y} &= aC_1 + by\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\dot{y} - by - aC_1 = 0\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+y &= C_2e^{bt} - C_1\frac{ a }{ b }\\
+\dot{y} &= bC_2e^{bt}\\
+&= b\left(y + C_1\frac{ a }{ b }\right)\\
+&= by + aC_1
+\end{aligned}
+$$
+
+したがって，
+
+$$
+\begin{aligned}
+y &= C_2e^{bt} - C_1\frac{ a }{ b }\\
+\end{aligned}
+$$
+
+$C_2$は定数．
