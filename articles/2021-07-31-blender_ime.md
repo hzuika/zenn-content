@@ -30,6 +30,7 @@ Blenderの開発環境を準備します．
 
 # IME関連の処理は`#WITH_INPUT_IME`マクロを探す
 ソースコード中の`#WITH_INPUT_IME`マクロによって，ビルド時にIMEサポートを切り替えることができます(デフォルトで有効)．このマクロを探すことで，IME関連の処理を簡単に見つけることができます．
+ただし，ソースコードにIME処理を追加したときは，CMakeLists.txtにWITH_INPUT_IMEマクロに関する記述が必要です．
 
 # IME用語
 
@@ -75,6 +76,7 @@ typedef struct wmIMEData {
 
 例えば、テキストオブジェクトであれば、編集モードに入ったときがテキスト入力の開始で、オブジェクトモードになったときが、テキスト入力の終了になるでしょう．
 編集モード関連の処理はobject_edit.cにあるので、テキストオブジェクトを表す`OB_FONT`で検索すると見つけられると思います。
+しかし，`wm_window_IME_begin`と`wm_window_IME_end`の引数に`wmWindow`が必要で，これは`wmWindow *CTX_wm_window(const bContext *C)`を使用して取得するため注意が必要です．
 
 ## IME関連のイベント処理
 テキスト入力中にIME関連のイベントを処理します．
