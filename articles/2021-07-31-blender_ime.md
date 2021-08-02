@@ -76,10 +76,6 @@ typedef struct wmIMEData {
 |テキスト入力終了|`ui_textedit_end`|
 |IME無効化|`ui_textedit_ime_end`|
 
-例えば、テキストオブジェクトであれば、編集モードに入ったときがテキスト入力の開始で、オブジェクトモードになったときが、テキスト入力の終了になるでしょう．
-編集モード関連の処理はobject_edit.cにあるので、テキストオブジェクトを表す`OB_FONT`で検索すると見つけられると思います。
-しかし，`wm_window_IME_begin`と`wm_window_IME_end`の引数に`wmWindow`が必要で，これは`wmWindow *CTX_wm_window(const bContext *C)`を使用して取得するため注意が必要です．
-
 ## IME関連のイベント処理
 テキスト入力中にIME関連のイベントを処理します．
 
@@ -129,3 +125,31 @@ OS(Windows/Mac) → GHOST → Window Manager → テキストボタン(UI)
 > General Handy Operating System Toolkitの略で，OS固有の処理を抽象化したライブラリです．Blenderは各OSのAPIではなく，GHOSTのAPIを利用します．
 > 参考: [Source/File Structure - Blender Developer Wiki](https://wiki.blender.org/wiki/Source/File_Structure)
 > ソースコード: `/intern/ghost/`
+
+## DebugビルドとReleaseビルド
+
+`make`でReleaseビルドができて，`make debug`でDebugビルドができます．
+
+ここからは，個人的な使い分けですが．．．
+Releaseビルドの方が体感早い気がするので，`printf`書いてReleaseビルドで確認した方が早い時もあります．
+バグが起きたり，動作がわからなくなったりしたら，Debugビルドをして，デバッガを使ったりします．
+
+> 自分はninjaとccacheを使っているのでコマンドは`make ccache ninja`と`make debug ccache ninja`になります．
+> 比較していないのですが，体感ビルド時間が早いような気がします．
+
+---
+
+# テキストオブジェクトに実装するには
+
+## IMEの有効化と無効化
+
+テキストオブジェクトであれば、編集モードに入ったときがテキスト入力の開始で、オブジェクトモードになったときが、テキスト入力の終了になるでしょう．
+編集モード関連の処理はobject_edit.cにあるので、テキストオブジェクトを表す`OB_FONT`で検索すると見つけられると思います。
+しかし，`wm_window_IME_begin`と`wm_window_IME_end`の引数に`wmWindow`が必要で，これは`wmWindow *CTX_wm_window(const bContext *C)`を使用して取得するため注意が必要です．
+つまり，`C`があるところで実行しないといけません．
+
+編集モードに入る処理と出る処理(UIとTabキー)は次の関数で実行されるようですね．
+`static int editmode_toggle_exec(bContext *C, wmOperator *op)`
+
+> `bool ED_object_editmode_enter(bContext *C, int flag)`かと思いましたが，この関数はどこにも参照されていないようです．
+> `bool ED_object_editmode_exit(bContext *C, int flag)`も`object_batch_delete_hierarchy_fn`でしか参照されていないので，削除処理でしか使わないみたいです．
