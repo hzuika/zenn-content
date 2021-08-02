@@ -16,6 +16,8 @@ Blenderの日本語入力を改善したいと思っています．しかし，�
 * [ ] テキストエディタ `source/blender/editors/space_text/`
 * [ ] Pythonコンソール `source/blender/editors/space_console/`
 
+(テキストオブジェクトは少しずつ実装していくかもしれません)
+
 > Linuxでは処理が別なので，全部サポートされています．
 
 UIのテキストボタンで実装されているIME関連の処理と同様の処理を実装することで他の場所でも日本語入力ができるようになります．
