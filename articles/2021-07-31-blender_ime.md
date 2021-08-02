@@ -145,11 +145,12 @@ Releaseビルドの方が体感早い気がするので，`printf`書いてRelea
 
 テキストオブジェクトであれば、編集モードに入ったときがテキスト入力の開始で、オブジェクトモードになったときが、テキスト入力の終了になるでしょう．
 編集モード関連の処理はobject_edit.cにあるので、テキストオブジェクトを表す`OB_FONT`で検索すると見つけられると思います。
-しかし，`wm_window_IME_begin`と`wm_window_IME_end`の引数に`wmWindow`が必要で，これは`wmWindow *CTX_wm_window(const bContext *C)`を使用して取得するため注意が必要です．
-つまり，`C`があるところで実行しないといけません．
 
-編集モードに入る処理と出る処理(UIとTabキー)は次の関数で実行されるようですね．
+`wm_window_IME_begin`と`wm_window_IME_end`の引数に`wmWindow`が必要で，これは`wmWindow *CTX_wm_window(const bContext *C)`を使用して取得します．
+つまり，`C`があるところでないと実行できません．
+
+UIやTabキーを使って，編集モードに入る処理と出る処理は次の関数で実行されるようですね．
 `static int editmode_toggle_exec(bContext *C, wmOperator *op)`
 
-> `bool ED_object_editmode_enter(bContext *C, int flag)`かと思いましたが，この関数はどこにも参照されていないようです．
-> `bool ED_object_editmode_exit(bContext *C, int flag)`も`object_batch_delete_hierarchy_fn`でしか参照されていないので，削除処理でしか使わないみたいです．
+> * `bool ED_object_editmode_enter(bContext *C, int flag)`かと思いましたが，この関数はどこにも参照されていないようです．
+> * `bool ED_object_editmode_exit(bContext *C, int flag)`も`object_batch_delete_hierarchy_fn`でしか参照されていないので，削除処理でしか使わないみたいです．
