@@ -159,3 +159,9 @@ UIやTabキーを使って，編集モードに入る処理と出る処理は次
 
 > * `bool ED_object_editmode_enter(bContext *C, int flag)`かと思いましたが，この関数はどこにも参照されていないようです．
 > * `bool ED_object_editmode_exit(bContext *C, int flag)`も`object_batch_delete_hierarchy_fn`でしか参照されていないので，削除処理でしか使わないみたいです．
+
+## INE関連のイベント処理
+
+テキストオブジェクトの入力処理はeditfont.cのinsert_text_invoke内で行われます．
+
+> insert_text_execはキーボード入力では呼ばれないようです．
