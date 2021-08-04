@@ -165,3 +165,5 @@ UIやTabキーを使って，編集モードに入る処理と出る処理は次
 テキストオブジェクトの入力処理はeditfont.cのinsert_text_invoke内で行われます．
 
 > insert_text_execはキーボード入力では呼ばれないようです．
+
+しかし、そのままでは`WM_IME_CONPOSITE_*`イベントがinvoke関数まで来ないようです．．
