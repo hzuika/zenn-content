@@ -146,7 +146,7 @@ Releaseビルドの方が体感早い気がするので，`printf`書いてRelea
 こんな感じでしょうか．
 何も入力できませんが，変換ウィンドウだけ表示されると思います．
 
-https://github.com/hzuika/blender/commit/c1197e8967d97d30f5d779b848068518f191ad3e
+https://github.com/hzuika/blender/commit/94ce267462f2383bfef3a7c971476e59b03c2c1c
 
 テキストオブジェクトであれば、編集モードに入ったときがテキスト入力の開始で、オブジェクトモードになったときが、テキスト入力の終了になるでしょう．
 編集モード関連の処理はobject_edit.cにあるので、テキストオブジェクトを表す`OB_FONT`で検索すると見つけられると思います。
@@ -162,8 +162,14 @@ UIやTabキーを使って，編集モードに入る処理と出る処理は次
 
 ## INE関連のイベント処理
 
+こんな感じでしょうか．
+変換中は文字列が表示されず，変換ウィンドウの位置もおかしくなっていますが，変換結果の文字列は入力できると思います．
+
+https://github.com/hzuika/blender/commit/f904fd8d5ec1661ce9a9b66af346d45575a511ee
+
 テキストオブジェクトの入力処理はeditfont.cのinsert_text_invoke内で行われます．
 
 > insert_text_execはキーボード入力では呼ばれないようです．
 
 しかし、そのままでは`WM_IME_CONPOSITE_*`イベントがinvoke関数まで来ないようです．．
+wm_eventmatch関数内でIMEイベントも含めるように処理を追加します．
