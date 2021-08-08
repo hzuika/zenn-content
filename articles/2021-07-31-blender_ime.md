@@ -51,12 +51,12 @@ Blenderの開発環境を準備します．
 Blenderでは`wmIMEData`構造体にIME関連の情報が格納されています．
 ```cpp
 typedef struct wmIMEData {
-  size_t result_len, composite_len;
-  char *str_result; // 変換結果の文字列
-  char *str_composite; // コンポジション文字列
-  int cursor_pos; // IME変換中のカーソル位置
-  int sel_start; // IME変換中の選択した文字列の範囲
-  int sel_end;
+  size_t result_len, composite_len; // 各文字列の長さ(utf-8なのでascii1文字は1，日本語1文字は3)
+  char *str_result; // 変換結果の文字列(utf-8)
+  char *str_composite; // コンポジション文字列(utf-8)
+  int cursor_pos; // IME変換中のカーソル位置(utf-8換算で0が先頭．日本語であれば3の倍数)
+  int sel_start; // IME変換中の選択した文字列の範囲(utf-8換算で0が先頭)
+  int sel_end; // 雨が|降る|ように (||で囲まれた範囲の場合 sel_start==6, sel_end==12)
   bool is_ime_composing; // IME変換中かどうかを表すフラグ
 } wmIMEData;
 ```
