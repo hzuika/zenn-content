@@ -173,3 +173,8 @@ https://github.com/hzuika/blender/commit/f904fd8d5ec1661ce9a9b66af346d45575a511e
 
 しかし、そのままでは`WM_IME_CONPOSITE_*`イベントがinvoke関数まで来ないようです．．
 wm_eventmatch関数内でIMEイベントも含めるように処理を追加します．
+
+## IMEウィンドウの移動
+
+カーソルの下にウィンドウを表示します．
+テキストオブジェクトのカーソル(長方形)の4点のローカル座標(x, y)は`EditFont`の`textcurs[0][8]`に左下から反時計回りに格納されています．
