@@ -229,7 +229,7 @@ https://github.com/actions/checkout/issues/125
 
 gh pr create のデフォルトが upstream である
 
-https://github.com/cli/cli/issues/588#:~:text=When%20creating%20a%20PR%20through,it's%20upstream%20set%20to%20origin.
+https://github.com/cli/cli/issues/588
 
 似たようなことをされています．
 
