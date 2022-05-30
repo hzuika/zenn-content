@@ -16,11 +16,16 @@ https://zenn.dev/smikitky/articles/0d250f7367eda9#%E5%8E%9F%E6%96%87%E3%81%B8%E3
 
 コメントに色々と書いていますが，簡単に
 1. 新規ブランチを作る
-1. フォーク元(`upstream`)をマージする (コンフリクトがあってもそのままマージ)
-1. プッシュする．
-1. プルリクエストを作る．
+2. フォーク元`upstream`をフェッチして，マージする
+3. (コンフリクトがあれば)コンフリクトマーカーごとコミットも行う
+4. (コミットがあれば)プッシュする．
+5. (コミットがあれば)プルリクエストを作る．
 
 の流れになります．
+
+また，
+* コンフリクトがあるかどうかを調べるために，マージした後，コミットされていないファイルを数えています．
+* コミットがあるか調べるために，マージしたときの標準出力が`Already up to date.`であるか比較します．
 
 ```yml:.github/workflows/merge.yml
 # upstreamリポジトリからコンフリクトマーカーをつけたままマージしてプルリクエストを作成
@@ -189,18 +194,31 @@ jobs:
           gh pr create --head ${{ env.BRANCH }} --base $GITHUB_REF_NAME --repo "$GITHUB_REPOSITORY" --title "${PR_TITLE}" --body "${PR_BODY}"
 ```
 
-今後の改善点は，次のとおりです．
+他にも改善できる部分はあると思いますが，とりあえずGitHub Actionsの勉強になったので満足です．
 
-* [ ] ブランチ名に`upstream`のコミットハッシュを使う
-    * 現在は，現在時刻を使っています．
-* [ ] ブランチが最新であることを知る部分は書き換えられないか?
-    * 現在は，マージしたときの出力が `Already up to date.` であるかどうか調べています．
-* [ ] 定期実行に変更したい
+改善点
+* ブランチ名に`upstream`のコミットハッシュを使ってみる
+* 定期実行
 
 # 参考
 
+github-scripts でコマンドを実行する
+
 https://github.com/gh640/command-result-action
 
-github-scripts の使い方
+github-scripts内に環境変数を持ってくる
 
-https://github.com/actions/checkout
+https://github.com/actions/github-script
+
+`${{ 式 }}` の使い方や，`startsWith`関数について
+
+`startsWith` の代わりに `contains` 関数でも可能ですが， `==` だとうまくいきませんでした．
+(改行文字が原因?)
+
+文字列リテラルはダブルクォーテーション`"`が使えないので注意が必要でした．
+
+https://docs.github.com/ja/actions/learn-github-actions/expressions
+
+デフォルトの環境変数
+
+https://docs.github.com/en/actions/learn-github-actions/environment-variables
