@@ -3,7 +3,7 @@ title: "[GitHub Actions] フォーク元からコンフリクトマーカーを�
 emoji: "❄️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [githubactions]
-published: false
+published: true
 ---
 
 # はじめに
@@ -212,7 +212,7 @@ https://github.com/actions/github-script
 
 `${{ 式 }}` の使い方や，`startsWith`関数について
 
-`startsWith` の代わりに `contains` 関数でも可能ですが， `==` だとうまくいきませんでした．
+`startsWith` の代わりに `contains` 関数でも可能ですが， `==` だとうまくいきませんでした
 (改行文字が原因?)
 
 文字列リテラルはダブルクォーテーション`"`が使えないので注意が必要でした．
@@ -222,3 +222,17 @@ https://docs.github.com/ja/actions/learn-github-actions/expressions
 デフォルトの環境変数
 
 https://docs.github.com/en/actions/learn-github-actions/environment-variables
+
+checkoutがshallowである
+
+https://github.com/actions/checkout/issues/125
+
+gh pr create のデフォルトが upstream である
+
+https://github.com/cli/cli/issues/588#:~:text=When%20creating%20a%20PR%20through,it's%20upstream%20set%20to%20origin.
+
+似たようなことをされています．
+
+さらに schedule の cron を使って定期実行しています．
+
+https://qiita.com/KEINOS/items/3bcaa6cea853f6b63475
