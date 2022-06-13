@@ -156,8 +156,8 @@ Releaseビルドの方が体感早い気がするので，`printf`書いてRelea
 
 https://github.com/hzuika/blender/commit/94ce267462f2383bfef3a7c971476e59b03c2c1c
 
-テキストオブジェクトであれば、編集モードに入ったときがテキスト入力の開始で、オブジェクトモードになったときが、テキスト入力の終了になるでしょう．
-編集モード関連の処理はobject_edit.cにあるので、テキストオブジェクトを表す`OB_FONT`で検索すると見つけられると思います。
+テキストオブジェクトであれば，編集モードに入ったときがテキスト入力の開始で，オブジェクトモードになったときが，テキスト入力の終了になるでしょう．
+編集モード関連の処理はobject_edit.cにあるので，テキストオブジェクトを表す`OB_FONT`で検索すると見つけられると思います．
 
 `wm_window_IME_begin`と`wm_window_IME_end`の引数に`wmWindow`が必要で，これは`wmWindow *CTX_wm_window(const bContext *C)`を使用して取得します．
 つまり，`C`があるところでないと実行できません．
@@ -179,7 +179,7 @@ https://github.com/hzuika/blender/commit/f904fd8d5ec1661ce9a9b66af346d45575a511e
 
 > insert_text_execはキーボード入力では呼ばれないようです．
 
-しかし、そのままでは`WM_IME_CONPOSITE_*`イベントがinvoke関数まで来ないようです．．
+しかし，そのままでは`WM_IME_CONPOSITE_*`イベントがinvoke関数まで来ないようです．．
 wm_eventmatch関数内でIMEイベントも含めるように処理を追加します．
 
 ## IMEウィンドウの移動
