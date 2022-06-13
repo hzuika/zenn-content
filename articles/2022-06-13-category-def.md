@@ -1,5 +1,5 @@
 ---
-title: "圏の例と定義と感じたこと"
+title: "圏って何なの?がわかる記事"
 emoji: "🙌"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ["圏論"]
